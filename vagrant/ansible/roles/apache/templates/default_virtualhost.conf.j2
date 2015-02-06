@@ -1,0 +1,34 @@
+# {{ ansible_managed }}
+<VirtualHost *:80>
+    ServerName {{ ansible_fqdn }}
+    ServerAdmin {{ apache_admin|default('admin@localhost')}}
+
+    DocumentRoot {{ apache_root}}
+    <Directory {{ apache_root }}>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName {{ ansible_fqdn }}
+    ServerAdmin {{ apache_admin|default('admin@localhost')}}
+
+    SSLEngine On
+    SSLCertificateFile /etc/apache2/ssl/server.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+
+    DocumentRoot {{ apache_root}}
+    <Directory {{ apache_root }}>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+</VirtualHost>

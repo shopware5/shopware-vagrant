@@ -1,0 +1,16 @@
+#! /bin/sh
+# /etc/init.d/make_cache_dirs
+# {{ ansible_managed }}
+
+mkdir -p -m 0777 /dev/shm/cache/
+mkdir -p -m 0777 /dev/shm/cache/database/
+mkdir -p -m 0777 /dev/shm/cache/proxies/
+mkdir -p -m 0777 /dev/shm/cache/templates/cache/
+mkdir -p -m 0777 /dev/shm/cache/templates/compile/
+mkdir -p -m 0777 /dev/shm/cache/doctrine/filecache/
+mkdir -p -m 0777 /dev/shm/cache/doctrine/proxies/
+mkdir -p -m 0777 /dev/shm/cache/doctrine/attributes/
+
+chown -R {{ apache_user }}:{{ apache_group }} /dev/shm/cache/
+
+exit 0
