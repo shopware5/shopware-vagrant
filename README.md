@@ -11,7 +11,13 @@ Virtualbox and Vagrant have to be installed on your local machine:
 The provision is done by [Ansible](http://www.ansibleworks.com/docs/) directly on the created vm.
 
 ## Usage
-First Boot-Up your vagrant virtual machine:
+
+Clone the repository to your local machine.
+
+    $ git clone https://github.com/shopwareLabs/shopware-vagrant
+    $ cd shopware-vagrant
+
+Boot up your vagrant virtual machine:
 
     $ cd vagrant
     $ vagrant up
@@ -19,6 +25,10 @@ First Boot-Up your vagrant virtual machine:
 The first boot may take a while, so feel free to get a cup of coffee.
 
 Your machine will be available at [http://33.33.33.10/](http://33.33.33.10/)
+All required tools like the LAMP stack are already installed.
+
+- PHPMyAdmin: [http://33.33.33.10/phpmyadmin](http://33.33.33.10/phpmyadmin)
+- MySQL user: `root`, password: `shopware`
 
 To SSH into the created VM:
 
