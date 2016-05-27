@@ -34,16 +34,62 @@ To SSH into the created VM:
 
     $ vagrant ssh
 
-
 If you use Putty the ssh configuration can be obtained via:
 
     $ vagrant ssh-config
-
 
 To reprovision your machine:
 
     $ vagrant provision
 
+## Installing Shopware
+
+SSH first into your VM:
+
+    $ vagrant ssh
+
+Clone the Shopware repository:
+
+    $ cd www
+    $ git clone https://github.com/shopware/shopware
+    $ cd shopware
+
+List all available versions with `git tag --list` and checkout the version of your choice, for instance:
+
+    $ git checkout v5.1.6
+
+Configure Shopware:
+
+    $ cd build
+    $ ant configure
+
+using the following parameters:
+
+- db-host: `localhost` (default)
+- db-port: `3306` (default)
+- db-name: `shopware`
+- db-username: `root`
+- db-password: `shopware`
+- app.host: `33.33.33.10`
+- app.path: `/shopware`
+
+Build Shopware:
+
+    $ ant build-unit
+
+Download test images:
+
+    $ cd ..
+    $ wget -O test_images.zip http://releases.s3.shopware.com/test_images.zip
+    $ unzip test_images.zip
+
+Configure your online store in a web browser with the credentials demo/demo:
+
+- Backend: [http://33.33.33.10/shopware/backend/](http://33.33.33.10/shopware/backend/)
+
+You can then access your storefront at:
+
+- Front-end: [http://33.33.33.10/shopware/](http://33.33.33.10/shopware/)
 
 ## Installation under arch linux
 
