@@ -91,7 +91,7 @@ You can then access your storefront at:
 
 - Front-end: [http://33.33.33.10/shopware/](http://33.33.33.10/shopware/)
 
-## Installation under Linux
+## Installation under arch linux
 
     sudo pacman -S virtualbox ansible net-tools nfs-utils
     sudo modprobe -a vboxdrv vboxnetadp vboxnetflt
