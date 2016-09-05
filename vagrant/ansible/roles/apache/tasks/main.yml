@@ -3,12 +3,17 @@
   apt: pkg={{ item }} state=present
   sudo: yes
   with_items:
-    - libapache2-mod-php5
+    - libapache2-mod-php5.6
     - phpmyadmin
-    - php5-cli
-    - php5-curl
-    - php5-gd
-    - php5-mysql
+    - php5.6-cli
+    - php5.6-curl
+    - php5.6-gd
+    - php5.6-mysql
+    - php5.6-mbstring
+    - php5.6-simplexml
+    - php5.6-xml
+    - php5.6-zip
+    - php5.6-apcu
 
 - name: Set /var/lock/apache2 owner
   file: path=/var/lock/apache2 recurse=yes state=directory group={{ apache_group }} owner={{ apache_user }}
@@ -28,7 +33,7 @@
   sudo: yes
 
 - name: Make sure apache_root exists
-  file: 
+  file:
     path={{ apache_root }}
     state=directory
     group={{ apache_group }}
@@ -44,7 +49,7 @@
   command: a2enmod {{ item }} creates=/etc/apache2/mods-enabled/{{ item }}.load
   with_items:
     - rewrite
-    - php5
+    - php5.6
     - autoindex
     - ssl
   sudo: yes
@@ -80,7 +85,7 @@
   - apache-reload
 
 - name: Configure PHP
-  template: src={{ item }} dest=/etc/php5/apache2/conf.d/{{ item }} owner=root group=root mode=0644
+  template: src={{ item }} dest=/etc/php/5.6/apache2/conf.d/{{ item }} owner=root group=root mode=0644
   with_items:
     - 05-opcache.ini
     - 99-debug.ini
@@ -88,8 +93,8 @@
   notify:
     - apache-restart
 
-- name: Configure PHP-CLI 
-  template: src={{ item }} dest=/etc/php5/cli/conf.d/{{ item }} owner=root group=root mode=0644
+- name: Configure PHP-CLI
+  template: src={{ item }} dest=/etc/php/5.6/cli/conf.d/{{ item }} owner=root group=root mode=0644
   with_items:
     - 05-opcache.ini
     - 99-debug.ini

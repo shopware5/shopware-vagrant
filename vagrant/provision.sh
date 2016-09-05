@@ -17,11 +17,11 @@ fi
 
 if [ ! -d $ANSIBLE_DIR ]; then
 	echo "Adding PHP 5.6 package sources"
-	sudo LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php5-5.6
+	sudo LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 	echo "Updating apt cache"
 	sudo apt-get update
-	echo "Installing PHP 5.6, Ansible dependencies and Git"
-	sudo apt-get install -y git python-yaml python-paramiko python-jinja2 php5
+	echo "Installing Ansible dependencies and Git"
+	sudo apt-get install -y git python-yaml python-paramiko python-jinja2
 	echo "Cloning Ansible"
 	git clone git://github.com/ansible/ansible.git ${ANSIBLE_DIR}
 	cd ${ANSIBLE_DIR}
