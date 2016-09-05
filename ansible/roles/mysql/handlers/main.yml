@@ -1,0 +1,12 @@
+---
+- name: mysql-start
+  service: name=mysql state=started
+  become: yes
+
+- name: mysql-restart
+  service: name=mysql state=restarted
+  become: yes
+
+- name: mysql-reload
+  service: name=mysql state=reloaded
+  become: yes

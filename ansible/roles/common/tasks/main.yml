@@ -1,0 +1,50 @@
+---
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  become: yes
+
+- name: upgrade the distro
+  apt: upgrade=yes
+  become: yes
+
+- name: install packages
+  apt: pkg={{ item }} state=latest
+  become: yes
+  with_items:
+    - sudo
+    - bash-completion
+    - python-pycurl
+    - git
+    - htop
+    - tree
+    - vim
+    - curl
+    - zip
+    - rsync
+    - wget
+    - ant
+    - tmux
+
+- name: copy tmux config
+  template: src=tmux.conf dest=~/.tmux.conf
+
+- name: be sure ntp is installed
+  apt: pkg=ntp state=installed
+  tags: ntp
+  become: yes
+
+- name: be sure ntpd is running and enabled
+  service: name=ntp state=running enabled=yes
+  tags: ntp
+  become: yes
+
+- name: Add a ~/bin to PATH
+  lineinfile: dest=~/.bashrc line='PATH="$HOME/bin:$PATH"'
+
+- name: Make sure ~/bin exists
+  file: path=~/bin state=directory
+
+- name: Copy common files to ~/bin
+  copy: src={{ item }} dest=~/bin/  mode=755
+  with_fileglob:
+    - bin/*

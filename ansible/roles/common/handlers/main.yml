@@ -1,0 +1,4 @@
+---
+- name: restart ntpd
+  service: name=ntp state=restarted
+  become_user: root
