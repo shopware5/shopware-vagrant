@@ -11,5 +11,5 @@ The role uses variables, that you can also override:
 * `shopware_db_pass` - `shopware` by default.
 * `shopware_db_user` - `shopware` by default.
 * `shopware_app_path` - `/shopware` by default.
-* `shopware_app_host` - `33.33.33.10` by default.
+* `shopware_app_host` - `192.168.33.10` by default.
 

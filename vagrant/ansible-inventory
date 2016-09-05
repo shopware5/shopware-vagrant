@@ -1,7 +1,7 @@
 [vagrant]
-33.33.33.10 ansible_ssh_user=vagrant
+192.168.33.10 ansible_ssh_user=vagrant
 
 [vagrant:vars]
-shopware_app_host = "33.33.33.10"
+shopware_app_host = "192.168.33.10"
 mysql_root_password = "shopware"
 

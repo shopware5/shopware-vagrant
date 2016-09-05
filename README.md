@@ -24,10 +24,10 @@ Boot up your vagrant virtual machine:
 
 The first boot may take a while, so feel free to get a cup of coffee.
 
-Your machine will be available at [http://33.33.33.10/](http://33.33.33.10/)
+Your machine will be available at [http://192.168.33.10/](http://192.168.33.10/)
 All required tools like the LAMP stack are already installed.
 
-- PHPMyAdmin: [http://33.33.33.10/phpmyadmin](http://33.33.33.10/phpmyadmin)
+- PHPMyAdmin: [http://192.168.33.10/phpmyadmin](http://192.168.33.10/phpmyadmin)
 - MySQL user: `root`, password: `shopware`
 
 To SSH into the created VM:
@@ -70,7 +70,7 @@ using the following parameters:
 - db-name: `shopware`
 - db-username: `root`
 - db-password: `shopware`
-- app.host: `33.33.33.10`
+- app.host: `192.168.33.10`
 - app.path: `/shopware`
 
 Build Shopware:
@@ -85,11 +85,11 @@ Download test images:
 
 Configure your online store in a web browser with the credentials demo/demo:
 
-- Backend: [http://33.33.33.10/shopware/backend/](http://33.33.33.10/shopware/backend/)
+- Backend: [http://192.168.33.10/shopware/backend/](http://192.168.33.10/shopware/backend/)
 
 You can then access your storefront at:
 
-- Front-end: [http://33.33.33.10/shopware/](http://33.33.33.10/shopware/)
+- Front-end: [http://192.168.33.10/shopware/](http://192.168.33.10/shopware/)
 
 ## Installation under arch linux
 
