@@ -1,0 +1,142 @@
+---
+
+- name: Add PHP PPA
+  apt_repository: repo='ppa:ondrej/php'
+  become: yes
+
+- name: Install Apache/PHP
+  apt: pkg={{ item }} state=present
+  become: yes
+  with_items:
+    - libapache2-mod-php5.6
+    - php5.6-cli
+    - php5.6-curl
+    - php5.6-gd
+    - php5.6-mysql
+    - php5.6-mbstring
+    - php5.6-simplexml
+    - php5.6-xml
+    - php5.6-zip
+    - php5.6-apcu
+
+    - libapache2-mod-php7.0
+    - php7.0-cli
+    - php7.0-curl
+    - php7.0-gd
+    - php7.0-mysql
+    - php7.0-mbstring
+    - php7.0-simplexml
+    - php7.0-xml
+    - php7.0-zip
+    - php7.0-apcu
+
+    - libapache2-mod-php7.1
+    - php7.1-cli
+    - php7.1-curl
+    - php7.1-gd
+    - php7.1-mysql
+    - php7.1-mbstring
+    - php7.1-simplexml
+    - php7.1-xml
+    - php7.1-zip
+    - php7.1-apcu
+
+- name: Set /var/lock/apache2 owner
+  file: path=/var/lock/apache2 recurse=yes state=directory group={{ apache_group }} owner={{ apache_user }}
+  become: yes
+
+- name: Set Apache user and group
+  lineinfile: >
+    dest=/etc/apache2/envvars
+    regexp="{{ item.key }}"
+    line="{{ item.value }}"
+    state=present
+  with_items:
+   - { key: "^export APACHE_RUN_USER=", value: "export APACHE_RUN_USER={{ apache_user }}" }
+   - { key: "^export APACHE_RUN_GROUP=", value: "export APACHE_RUN_GROUP={{ apache_group }}" }
+  notify:
+   - apache-restart
+  become: yes
+
+- name: Make sure apache_root exists
+  file:
+    path={{ apache_root }}
+    state=directory
+    group={{ apache_group }}
+    owner={{ apache_user }}
+  become: yes
+
+- name: Copy phpinfo.hp
+  template: src={{ item }} dest={{ apache_root }}/{{ item }} owner={{ apache_user }} group={{ apache_group }} mode=0644
+  with_items:
+    - phpinfo.php
+
+- name: Apache | Disable modules
+  apache2_module: state=absent name={{ item }}
+  with_items:
+    - php5.6
+    - php7.1
+  become: yes
+
+- name: Apache | Enable modules
+  command: a2enmod {{ item }} creates=/etc/apache2/mods-enabled/{{ item }}.load
+  with_items:
+    - rewrite
+    - php7.0
+    - autoindex
+    - ssl
+  become: yes
+  notify:
+  - apache-restart
+
+- name: Delete default Apache vhost
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  become: yes
+  notify: apache-restart
+
+- name: Push default virtualhost configuration template
+  template:
+    src=default_virtualhost.conf.j2
+    dest=/etc/apache2/sites-available/default-vhost.conf
+  notify:
+    - apache-restart
+  become: yes
+
+- name: Create ssl directory
+  file: path=/etc/apache2/ssl state=directory group={{ apache_group }} owner={{ apache_user }}
+  become: yes
+
+- name: create self-signed SSL cert
+  command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}" -days 3650 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt -extensions v3_ca creates=/etc/apache2/ssl/server.crt
+
+- name: Apache | Enable Sites
+  command: a2ensite {{ item }}
+  args:
+      creates: /etc/apache2/sites-enabled/{{ item }}.conf
+  with_items:
+    - default-vhost
+  become: yes
+  notify:
+  - apache-reload
+
+- name: Configure PHP
+  template: src={{ item.file }} dest=/etc/php/{{ item.phpversion }}/apache2/conf.d/{{ item.file }} owner=root group=root mode=0644
+  with_items:
+    - { file: '99-debug.ini', phpversion: '5.6'}
+    - { file: '99-debug.ini', phpversion: '7.0'}
+    - { file: '99-debug.ini', phpversion: '7.1'}
+  become: yes
+  notify:
+    - apache-restart
+
+- name: Configure PHP-CLI
+  template: src={{ item.file }} dest=/etc/php/{{ item.phpversion }}/cli/conf.d/{{ item.file }} owner=root group=root mode=0644
+  with_items:
+    - { file: '99-debug.ini', phpversion: '5.6'}
+    - { file: '99-debug.ini', phpversion: '7.0'}
+    - { file: '99-debug.ini', phpversion: '7.1'}
+  become: yes
+
+- name: be sure apache is started and enabled
+  service: name=apache2 state=started enabled=yes
+  become: yes
