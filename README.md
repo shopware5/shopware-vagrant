@@ -60,11 +60,11 @@ Call one of the following commands to change the PHP Version:
 
 This will change the PHP Version used by the Apache webserver as well as the Version of the `php` command.
 
-You can also call the PHP versions direclty using their full path
+You can also call the PHP versions directly using their full path
 
-    $ /usr/bin/php7.1 -v
+    $ /usr/bin/php5.6 -V
     $ /usr/bin/php7.0 -v
-    $ /usr/bin/php5.5 -V
+    $ /usr/bin/php7.1 -v
 
 ## Installing Shopware
 
