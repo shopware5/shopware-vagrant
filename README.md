@@ -44,6 +44,14 @@ To reprovision your machine:
 
     $ vagrant provision
 
+### Troubleshooting
+
+- Error message "The 'ansible_local' provisioner could not be found.":
+
+Make sure vagrant is at least at version 1.8:
+
+    $ vagrant -v
+
 ## Change PHP Version
 
 The following PHP Versions are installed by default:
