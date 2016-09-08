@@ -1,9 +1,5 @@
 ---
-
-- name: Download adminer
-  get_url:
-    url: https://www.adminer.org/static/download/4.2.5/adminer-4.2.5-mysql-en.php
+- name: Copy adminer
+  copy:
+    src: "adminer-4.2.5-mysql-en.php"
     dest: "{{ apache_root }}/adminer.php"
-    checksum: sha256:0d22e3ed77af93050c42cf31a09a451c3d78f3519098f0a9e45ed82a8c56460e
-    mode: 0440
-    timeout: 30
