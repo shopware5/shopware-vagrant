@@ -1,0 +1,23 @@
+---
+  
+- name: Get Ioncube
+  get_url:
+    url: http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
+    dest: /tmp
+  
+- name: Extract Ioncube
+  unarchive: src=/tmp/ioncube_loaders_lin_x86-64.tar.gz dest=/tmp
+  
+- name: Copy Ioncube 5.6
+  become: yes
+  become_method: sudo
+  copy:
+    src: "/tmp/ioncube/ioncube_loader_lin_5.6.so"
+    dest: "/usr/lib/php/20131226/"
+    
+- name: Write Ioncube in php.ini
+  become: yes
+  become_method: sudo
+  lineinfile: dest=/etc/php/5.6/apache2/php.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" insertafter=EOF state=present
+  notify:
+    - apache-restart
