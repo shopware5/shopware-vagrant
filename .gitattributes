@@ -1,1 +1,1 @@
-ansible/roles/common/files/bin/* -eol=lf
+ansible/roles/common/files/bin/* text eol=lf
