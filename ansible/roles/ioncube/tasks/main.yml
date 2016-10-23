@@ -15,9 +15,23 @@
     src: "/tmp/ioncube/ioncube_loader_lin_5.6.so"
     dest: "/usr/lib/php/20131226/"
     
-- name: Write Ioncube in php.ini
+- name: Add Ioncube 5.6 to php.ini
   become: yes
   become_method: sudo
   lineinfile: dest=/etc/php/5.6/apache2/php.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" insertafter=EOF state=present
+  notify:
+    - apache-restart
+
+- name: Copy Ioncube 7.0
+  become: yes
+  become_method: sudo
+  copy:
+    src: "/tmp/ioncube/ioncube_loader_lin_7.0.so"
+    dest: "/usr/lib/php/20151012/"
+
+- name: Add Ioncube 7.0 to php.ini
+  become: yes
+  become_method: sudo
+  lineinfile: dest=/etc/php/7.0/apache2/php.ini line="zend_extension = /usr/lib/php/20151012/ioncube_loader_lin_7.0.so" insertafter=EOF state=present
   notify:
     - apache-restart
