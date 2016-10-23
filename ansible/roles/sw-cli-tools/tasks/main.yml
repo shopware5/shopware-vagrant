@@ -1,0 +1,7 @@
+---
+- name: download sw cli tools
+  get_url:
+    url: http://shopwarelabs.github.io/sw-cli-tools/sw.phar
+    dest: ~/bin/sw
+    mode: 0755
+  tags: sw-cli-tools
