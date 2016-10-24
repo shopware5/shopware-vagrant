@@ -1,0 +1,15 @@
+- name: Install NodeJS
+  apt: pkg={{ item }} state=present
+  become: yes
+  become_method: sudo
+  with_items:
+    - nodejs
+    - npm
+
+- name: Create link symlink for node
+  become: yes
+  become_method: sudo
+  file:
+    src: /usr/bin/nodejs
+    dest: /usr/bin/node
+    state: link
