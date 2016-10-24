@@ -6,7 +6,7 @@ Vagrant Shopware Box
 Virtualbox and Vagrant (min. Version 1.8) have to be installed on your local machine:
 
  - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
- - [Vagrant](https://www.vagrantup.com/downloads)
+ - [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ### Vagrant installation for Debian / Ubuntu
  
