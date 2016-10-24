@@ -6,20 +6,20 @@
   tags: composer
 
 - name: install composer
-  shell: cat /tmp/installer | php -- --install-dir=/home/vagrant/
+  shell: cat /tmp/installer | php -- --install-dir=/home/vagrant/bin
   args:
-    creates: /home/vagrant/composer.phar
+    creates: /home/vagrant/bin/composer.phar
   tags: composer
 
 - name: rename composer.phar to composer
-  shell: mv /home/vagrant/composer.phar /home/vagrant/composer
+  shell: mv /home/vagrant/bin/composer.phar /home/vagrant/bin/composer
   args:
-    creates: /home/vagrant/composer
+    creates: /home/vagrant/bin/composer
   tags: composer
 
 - name: make composer executable
   file:
-    path: /home/vagrant/composer
+    path: /home/vagrant/bin/composer
     mode: a+x
     state: file
   tags: composer
