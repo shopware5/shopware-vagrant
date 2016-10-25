@@ -8,4 +8,6 @@
     - adminer
     - ioncube
     - composer
+    - nodejs
     - sw-cli-tools
+    - grunt
