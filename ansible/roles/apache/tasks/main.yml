@@ -41,6 +41,8 @@
     - php7.1-zip
     - php7.1-apcu
 
+    - php-xdebug
+
 - name: Set /var/lock/apache2 owner
   file: path=/var/lock/apache2 recurse=yes state=directory group={{ apache_group }} owner={{ apache_user }}
   become: yes
