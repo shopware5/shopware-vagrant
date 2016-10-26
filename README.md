@@ -70,7 +70,7 @@ This will change the PHP Version used by the Apache webserver as well as the Ver
 
 You can also call the PHP versions directly using their full path
 
-    $ /usr/bin/php5.6 -V
+    $ /usr/bin/php5.6 -v
     $ /usr/bin/php7.0 -v
     $ /usr/bin/php7.1 -v
 
