@@ -139,6 +139,12 @@
     - { file: '99-debug.ini', phpversion: '7.1'}
   become: yes
 
+- name: Set PHP CLI verion
+  alternatives:
+    name: php
+    path: /usr/bin/php7.0
+  become: yes
+
 - name: be sure apache is started and enabled
   service: name=apache2 state=started enabled=yes
   become: yes
