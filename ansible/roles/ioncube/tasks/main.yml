@@ -4,6 +4,7 @@
   get_url:
     url: http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
     dest: /tmp
+  tags: ioncube
   
 - name: Extract Ioncube
   unarchive: src=/tmp/ioncube_loaders_lin_x86-64.tar.gz dest=/tmp
@@ -14,20 +15,31 @@
   copy:
     src: "/tmp/ioncube/ioncube_loader_lin_5.6.so"
     dest: "/usr/lib/php/20131226/"
+  tags: ioncube
     
-- name: Add Ioncube 5.6 to Apache2 php.ini
+- name: Add Ioncube 5.6 as available php mod
   become: yes
   become_method: sudo
-  lineinfile: dest=/etc/php/5.6/apache2/php.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" insertafter=EOF state=present
-  notify:
-    - apache-restart
-    
-- name: Add Ioncube 5.6 to CLI php.ini
+  lineinfile: dest=/etc/php/5.6/mods-available/ioncube.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" create=yes state=present
+  tags: ioncube
+
+- name: Enable Ioncube for php 5.6
   become: yes
   become_method: sudo
-  lineinfile: dest=/etc/php/5.6/cli/php.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" insertafter=EOF state=present
-  notify:
-    - apache-restart
+  file:
+    src: /etc/php/5.6/mods-available/ioncube.ini
+    dest: /etc/php/5.6/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
+
+- name: Enable Ioncube for php 5.6 cli
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/5.6/mods-available/ioncube.ini
+    dest: /etc/php/5.6/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
 
 - name: Copy Ioncube 7.0
   become: yes
@@ -35,17 +47,28 @@
   copy:
     src: "/tmp/ioncube/ioncube_loader_lin_7.0.so"
     dest: "/usr/lib/php/20151012/"
+  tags: ioncube
 
-- name: Add Ioncube 7.0 to Apache2 php.ini
+- name: Add Ioncube 7.0 as available php mod
   become: yes
   become_method: sudo
-  lineinfile: dest=/etc/php/7.0/apache2/php.ini line="zend_extension = /usr/lib/php/20151012/ioncube_loader_lin_7.0.so" insertafter=EOF state=present
-  notify:
-    - apache-restart
+  lineinfile: dest=/etc/php/7.0/mods-available/ioncube.ini line="zend_extension = /usr/lib/php/20151012/ioncube_loader_lin_7.0.so" create=yes state=present
+  tags: ioncube
 
-- name: Add Ioncube 7.0 to CLI php.ini
+- name: Enable Ioncube for php 7.0
   become: yes
   become_method: sudo
-  lineinfile: dest=/etc/php/7.0/cli/php.ini line="zend_extension = /usr/lib/php/20151012/ioncube_loader_lin_7.0.so" insertafter=EOF state=present
-  notify:
-    - apache-restart
+  file:
+    src: /etc/php/7.0/mods-available/ioncube.ini
+    dest: /etc/php/7.0/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
+
+- name: Enable Ioncube for php 7.0 cli
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/7.0/mods-available/ioncube.ini
+    dest: /etc/php/7.0/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
