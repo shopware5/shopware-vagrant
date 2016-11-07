@@ -73,18 +73,10 @@
   with_items:
     - phpinfo.php
 
-- name: Apache | Disable modules
-  apache2_module: state=absent name={{ item }}
-  with_items:
-    - php5.6
-    - php7.1
-  become: yes
-
 - name: Apache | Enable modules
   command: a2enmod {{ item }} creates=/etc/apache2/mods-enabled/{{ item }}.load
   with_items:
     - rewrite
-    - php7.0
     - autoindex
     - ssl
   become: yes
@@ -139,10 +131,8 @@
     - { file: '99-debug.ini', phpversion: '7.1'}
   become: yes
 
-- name: Set PHP CLI verion
-  alternatives:
-    name: php
-    path: /usr/bin/php7.0
+- name: Set PHP version
+  command: /home/vagrant/bin/changephp_5.6
   become: yes
 
 - name: be sure apache is started and enabled
