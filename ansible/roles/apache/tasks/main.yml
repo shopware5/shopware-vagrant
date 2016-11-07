@@ -17,7 +17,6 @@
     - php5.6-simplexml
     - php5.6-xml
     - php5.6-zip
-    - php5.6-apcu
 
     - libapache2-mod-php7.0
     - php7.0-cli
@@ -28,7 +27,6 @@
     - php7.0-simplexml
     - php7.0-xml
     - php7.0-zip
-    - php7.0-apcu
 
     - libapache2-mod-php7.1
     - php7.1-cli
@@ -39,8 +37,8 @@
     - php7.1-simplexml
     - php7.1-xml
     - php7.1-zip
-    - php7.1-apcu
 
+    - php-apcu
     - php-xdebug
 
 - name: Set /var/lock/apache2 owner
