@@ -71,18 +71,10 @@
   with_items:
     - phpinfo.php
 
-- name: Apache | Disable modules
-  apache2_module: state=absent name={{ item }}
-  with_items:
-    - php7.0
-    - php7.1
-  become: yes
-
 - name: Apache | Enable modules
   command: a2enmod {{ item }} creates=/etc/apache2/mods-enabled/{{ item }}.load
   with_items:
     - rewrite
-    - php5.6
     - autoindex
     - ssl
   become: yes
@@ -138,7 +130,7 @@
   become: yes
 
 - name: Set PHP version
-  command: /home/vagrant/bin/changephp_5.6
+  command: /home/vagrant/bin/changephp_7.0
   become: yes
 
 - name: be sure apache is started and enabled
