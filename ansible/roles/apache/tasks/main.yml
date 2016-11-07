@@ -137,10 +137,8 @@
     - { file: '99-debug.ini', phpversion: '7.1'}
   become: yes
 
-- name: Set PHP CLI verion
-  alternatives:
-    name: php
-    path: /usr/bin/php7.0
+- name: Set PHP version
+  command: /home/vagrant/bin/changephp_5.6
   become: yes
 
 - name: be sure apache is started and enabled
