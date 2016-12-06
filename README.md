@@ -58,7 +58,7 @@ The following PHP Versions are installed by default:
 
  - PHP 5.6
  - PHP 7.0
- - PHP 7.1 (RC)
+ - PHP 7.1
 
 Call one of the following commands to change the PHP Version:
  
