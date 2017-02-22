@@ -16,6 +16,8 @@ Vagrant.configure("2") do |config|
     config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box"
 
     config.vm.network :private_network, ip: "192.168.33.10"
+    config.vm.network "forwarded_port", guest: 8000, host: 8094
+    config.vm.network "forwarded_port", guest: 35729, host: 35729
 
     config.vm.hostname = "shopware.local"
 
