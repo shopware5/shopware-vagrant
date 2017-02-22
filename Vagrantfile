@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
     #config.vm.synced_folder "../src", "/home/vagrant/www/shopware", create: true;
 
     config.vm.provider :virtualbox do |vb|
+        vb.name = "vagrant_shopware";
         vb.customize ["modifyvm", :id, "--cpus", 4]
         vb.customize ["modifyvm", :id, "--ioapic", "on"]
         vb.customize ["modifyvm", :id, "--memory", 2048]
