@@ -3,15 +3,15 @@ Vagrant Shopware Box
 
 ## Installation
 
-Virtualbox and Vagrant (min. Version 1.8) have to be installed on your local machine:
+Virtualbox and Vagrant (min. Version 2.0) have to be installed on your local machine:
 
  - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
  - [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ### Vagrant installation for Debian / Ubuntu
  
-    $ wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
-    $ sudo dpkg -i vagrant_1.8.5_x86_64.deb
+    $ wget https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.deb
+    $ sudo dpkg -i vagrant_2.0.1_x86_64.deb
     
 ## Usage
 
@@ -48,7 +48,7 @@ To reprovision your machine:
 
 - Error message "The 'ansible_local' provisioner could not be found.":
 
-Make sure vagrant is at least at version 1.8:
+Make sure vagrant is at least at version 2.0:
 
     $ vagrant -v
 
@@ -59,12 +59,14 @@ The following PHP Versions are installed by default:
  - PHP 5.6
  - PHP 7.0
  - PHP 7.1
+ - PHP 7.2
 
 Call one of the following commands to change the PHP Version:
  
     $ changephp_5.6
     $ changephp_7.0
     $ changephp_7.1
+    $ changephp_7.2
 
 This will change the PHP Version used by the Apache webserver as well as the Version of the `php` command.
 
@@ -73,6 +75,7 @@ You can also call the PHP versions directly using their full path
     $ /usr/bin/php5.6 -v
     $ /usr/bin/php7.0 -v
     $ /usr/bin/php7.1 -v
+    $ /usr/bin/php7.2 -v
 
 ## Installing Shopware
 
