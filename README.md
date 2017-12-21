@@ -3,15 +3,15 @@ Vagrant Shopware Box
 
 ## Installation
 
-Virtualbox and Vagrant (min. Version 1.8) have to be installed on your local machine:
+Virtualbox and Vagrant (min. Version 2.0) have to be installed on your local machine:
 
  - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
  - [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ### Vagrant installation for Debian / Ubuntu
  
-    $ wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
-    $ sudo dpkg -i vagrant_1.8.5_x86_64.deb
+    $ wget https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.deb
+    $ sudo dpkg -i vagrant_2.0.1_x86_64.deb
     
 ## Usage
 
@@ -48,7 +48,7 @@ To reprovision your machine:
 
 - Error message "The 'ansible_local' provisioner could not be found.":
 
-Make sure vagrant is at least at version 1.8:
+Make sure vagrant is at least at version 2.0:
 
     $ vagrant -v
 
