@@ -38,6 +38,16 @@
     - php7.1-xml
     - php7.1-zip
 
+    - libapache2-mod-php7.2
+    - php7.2-cli
+    - php7.2-curl
+    - php7.2-gd
+    - php7.2-mysql
+    - php7.2-mbstring
+    - php7.2-simplexml
+    - php7.2-xml
+    - php7.2-zip
+
     - php-apcu
     - php-xdebug
 
