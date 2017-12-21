@@ -59,12 +59,14 @@ The following PHP Versions are installed by default:
  - PHP 5.6
  - PHP 7.0
  - PHP 7.1
+ - PHP 7.2
 
 Call one of the following commands to change the PHP Version:
  
     $ changephp_5.6
     $ changephp_7.0
     $ changephp_7.1
+    $ changephp_7.2
 
 This will change the PHP Version used by the Apache webserver as well as the Version of the `php` command.
 
@@ -73,6 +75,7 @@ You can also call the PHP versions directly using their full path
     $ /usr/bin/php5.6 -v
     $ /usr/bin/php7.0 -v
     $ /usr/bin/php7.1 -v
+    $ /usr/bin/php7.2 -v
 
 ## Installing Shopware
 
