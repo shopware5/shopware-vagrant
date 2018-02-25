@@ -96,7 +96,7 @@ Download test images:
     $ unzip test_images.zip
     
 after unzipping them you have to make the images visible in store. 
-You can do this by calling the migrate command:
+You can do this by calling the migration command:
 
     $ bin/console sw:media:migrate
 
