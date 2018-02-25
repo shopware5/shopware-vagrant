@@ -94,6 +94,11 @@ Download test images:
     $ cd home/vagrant/www/shopware
     $ wget -O test_images.zip http://releases.s3.shopware.com/test_images.zip
     $ unzip test_images.zip
+    
+after unzipping them you have to make the images visible in store. 
+You can do this by calling the migrate command:
+
+    $ bin/console sw:media:migrate
 
 Configure your online store in a web browser with the credentials demo/demo:
 
