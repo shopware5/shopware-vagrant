@@ -76,7 +76,7 @@
     owner={{ apache_user }}
   become: yes
 
-- name: Copy phpinfo.hp
+- name: Copy phpinfo.php
   template: src={{ item }} dest={{ apache_root }}/{{ item }} owner={{ apache_user }} group={{ apache_group }} mode=0644
   with_items:
     - phpinfo.php
