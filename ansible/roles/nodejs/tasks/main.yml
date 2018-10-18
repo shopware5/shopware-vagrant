@@ -1,15 +1,18 @@
-- name: Install NodeJS
-  apt: pkg={{ item }} state=present
+- name: Install GPG key for NodeJS LTS
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
   become: yes
-  become_method: sudo
-  with_items:
-    - nodejs
-    - npm
 
-- name: Create link symlink for node
+- name: Install NodeJS LTS repository
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_8.x xenial main"
+    state: present
+    update_cache: yes
   become: yes
-  become_method: sudo
-  file:
-    src: /usr/bin/nodejs
-    dest: /usr/bin/node
-    state: link
+
+- name: Install NodeJS
+  apt:
+    name: nodejs
+    state: present
+  become: yes
