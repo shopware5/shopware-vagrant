@@ -38,7 +38,7 @@
   become: yes
 
 - name: be sure ntpd is running and enabled
-  service: name=ntp state=running enabled=yes
+  service: name=ntp state=started enabled=yes
   tags: ntp
   become: yes
 
