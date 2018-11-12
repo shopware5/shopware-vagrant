@@ -43,6 +43,23 @@ If you use Putty the ssh configuration can be obtained via:
 To reprovision your machine:
 
     $ vagrant provision
+    
+## Access files on Host machine
+
+To start local development, it is recommended to sync the source shopware folder to a local folder.
+To do this, uncomment one of the config.vm.synced_folder lines in the Vagrantfile file.
+
+    #config.vm.synced_folder "../src", "/home/vagrant/www/shopware", create: true, type: "smb"
+    #config.vm.synced_folder "../src", "/home/vagrant/www/shopware", create: true, type: "nfs"
+    #config.vm.synced_folder "../src", "/home/vagrant/www/shopware", create: true;
+    
+For example, for MacOS:
+
+    config.vm.synced_folder "src", "/home/vagrant/www/shopware", create: true, type: "nfs"
+
+After editing the vagrant file, make sure to reload your instance.
+
+    $ vagrant reload
 
 ### Troubleshooting
 
@@ -91,7 +108,7 @@ This will download the latest git version of shopware and install it into `/home
 
 Download test images:
 
-    $ cd home/vagrant/www/shopware
+    $ cd /home/vagrant/www/shopware
     $ wget -O test_images.zip http://releases.s3.shopware.com/test_images_since_5.1.zip
     $ unzip test_images.zip
 
