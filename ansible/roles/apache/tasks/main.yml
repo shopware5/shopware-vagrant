@@ -127,6 +127,7 @@
     - { file: '99-debug.ini', phpversion: '5.6'}
     - { file: '99-debug.ini', phpversion: '7.0'}
     - { file: '99-debug.ini', phpversion: '7.1'}
+    - { file: '99-debug.ini', phpversion: '7.2'}
   become: yes
   notify:
     - apache-restart
@@ -137,6 +138,7 @@
     - { file: '99-debug.ini', phpversion: '5.6'}
     - { file: '99-debug.ini', phpversion: '7.0'}
     - { file: '99-debug.ini', phpversion: '7.1'}
+    - { file: '99-debug.ini', phpversion: '7.2'}
   become: yes
 
 - name: Set PHP version
