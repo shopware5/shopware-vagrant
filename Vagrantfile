@@ -28,6 +28,9 @@ Vagrant.configure("2") do |config|
 
       # Run Ansible from the Vagrant VM
       config.vm.provision "ansible_local" do |ansible|
+        if File.exist?(File.expand_path("ansible/requirements.yml"))
+          ansible.galaxy_role_file = "ansible/requirements.yml"
+        end
         ansible.playbook = "ansible/playbook.yml"
         ansible.extra_vars = {
           "shopware_app_host" => "192.168.33.10",
