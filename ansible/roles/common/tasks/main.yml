@@ -33,7 +33,7 @@
   template: src=tmux.conf dest=~/.tmux.conf
 
 - name: be sure ntp is installed
-  apt: pkg=ntp state=installed
+  apt: pkg=ntp state=present
   tags: ntp
   become: yes
 
