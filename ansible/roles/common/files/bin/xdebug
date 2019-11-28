@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# This script turns on/off Xdebug in the current php version. It also checks if it's enabled or disabled
+# to prevent unnecessary apache restarts.
+
+#Colors>
+RED='\033[0;31m'
+GREEN='\e[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+#<
+
+#Vars>
+PHPVERSION=$(php -r 'echo substr(PHP_VERSION,0,3);')
+EXTENSION='zend_extension=xdebug.so'
+# params to enable xdebug
+ACTIVATE="a activate enable on up"
+# params to disable xdebug
+DEACTIVATE="d deactivate disable off halt"
+#<
+
+#files
+FILE="/etc/php/${PHPVERSION}/apache2/conf.d/20-xdebug.ini"
+#<
+
+
+function isXdebug(){
+    #check if Xdebug is running or not
+    php -v | grep -oP 'Xdebug' > /dev/null && return 1
+    return 0
+}
+
+function apache_restart(){
+    sudo service apache2 restart
+}
+
+function enableXdebug(){
+    #write to file and enable Xdebug
+    echo ${EXTENSION} | sudo tee ${FILE}
+}
+
+function disableXdebug(){
+    #write to file and disable Xdebug
+    echo ";${EXTENSION}" | sudo tee ${FILE}
+}
+
+
+# Activate
+if echo $ACTIVATE | grep -w $1 > /dev/null; then
+
+    if isXdebug ; then
+        echo -e "${GREEN}Activating Xdebug...${YELLOW}"
+        enableXdebug
+        echo -e "${GREEN}Restarting Apache...${YELLOW}"
+        apache_restart
+        echo -e "Done${NC}"
+    else
+        echo -e "${RED}Xdebug is already enabled.${NC}"
+    fi
+fi
+
+# Deactivate
+if echo $DEACTIVATE | grep -w $1 > /dev/null; then
+    if ! isXdebug ; then
+        echo -e "${GREEN}Deactivating Xdebug...${YELLOW}"
+        disableXdebug
+        echo -e "${GREEN}Restarting Apache...${YELLOW}"
+        apache_restart
+        echo -e "Done${NC}"
+    else
+        echo -e "${RED}Xdebug is already disabled.${NC}"
+    fi
+fi
