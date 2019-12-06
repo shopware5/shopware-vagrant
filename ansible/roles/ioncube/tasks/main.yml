@@ -72,3 +72,67 @@
     dest: /etc/php/7.0/cli/conf.d/0-ioncube.ini
     state: link
   tags: ioncube
+
+- name: Copy Ioncube 7.1
+  become: yes
+  become_method: sudo
+  copy:
+    src: "/tmp/ioncube/ioncube_loader_lin_7.1.so"
+    dest: "/usr/lib/php/20160303/"
+  tags: ioncube
+
+- name: Add Ioncube 7.1 as available php mod
+  become: yes
+  become_method: sudo
+  lineinfile: dest=/etc/php/7.1/mods-available/ioncube.ini line="zend_extension = /usr/lib/php/20160303/ioncube_loader_lin_7.1.so" create=yes state=present
+  tags: ioncube
+
+- name: Enable Ioncube for php 7.1
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/7.1/mods-available/ioncube.ini
+    dest: /etc/php/7.1/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
+
+- name: Enable Ioncube for php 7.1 cli
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/7.1/mods-available/ioncube.ini
+    dest: /etc/php/7.1/cli/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
+
+- name: Copy Ioncube 7.2
+  become: yes
+  become_method: sudo
+  copy:
+    src: "/tmp/ioncube/ioncube_loader_lin_7.2.so"
+    dest: "/usr/lib/php/20170718/"
+  tags: ioncube
+
+- name: Add Ioncube 7.2 as available php mod
+  become: yes
+  become_method: sudo
+  lineinfile: dest=/etc/php/7.2/mods-available/ioncube.ini line="zend_extension = /usr/lib/php/20170718/ioncube_loader_lin_7.2.so" create=yes state=present
+  tags: ioncube
+
+- name: Enable Ioncube for php 7.2
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/7.2/mods-available/ioncube.ini
+    dest: /etc/php/7.2/apache2/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
+
+- name: Enable Ioncube for php 7.2 cli
+  become: yes
+  become_method: sudo
+  file:
+    src: /etc/php/7.2/mods-available/ioncube.ini
+    dest: /etc/php/7.2/cli/conf.d/0-ioncube.ini
+    state: link
+  tags: ioncube
