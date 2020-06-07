@@ -68,6 +68,18 @@ After editing the vagrant file, make sure to reload your instance.
 Make sure vagrant is at least at version 2.0:
 
     $ vagrant -v
+    
+- Unable to mount directory (MacOS), given error message:
+
+        Got different reports about installed GuestAdditions version:
+        Virtualbox on your host claims:   5.0.18
+        VBoxService inside the vm claims: 6.0.8
+        Going on, assuming VBoxService is correct..."
+ 
+Make sure GuestAdditions are same versions:
+ 
+    $ vagrant vbguest --do install    
+    $ vagrant reload
 
 ## Change PHP Version
 
