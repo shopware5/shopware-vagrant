@@ -17,6 +17,7 @@
     - php5.6-simplexml
     - php5.6-xml
     - php5.6-zip
+    - php5.6-intl
 
     - libapache2-mod-php7.0
     - php7.0-cli
@@ -27,6 +28,7 @@
     - php7.0-simplexml
     - php7.0-xml
     - php7.0-zip
+    - php7.0-intl
 
     - libapache2-mod-php7.1
     - php7.1-cli
@@ -37,6 +39,7 @@
     - php7.1-simplexml
     - php7.1-xml
     - php7.1-zip
+    - php7.1-intl
 
     - libapache2-mod-php7.2
     - php7.2-cli
@@ -47,6 +50,7 @@
     - php7.2-simplexml
     - php7.2-xml
     - php7.2-zip
+    - php7.2-intl
 
     - php-apcu
     - php-xdebug
@@ -142,9 +146,10 @@
   become: yes
 
 - name: Set PHP version
-  command: /home/vagrant/bin/changephp_7.0
+  command: /home/vagrant/bin/changephp_7.2
   become: yes
 
 - name: be sure apache is started and enabled
   service: name=apache2 state=started enabled=yes
   become: yes
+
