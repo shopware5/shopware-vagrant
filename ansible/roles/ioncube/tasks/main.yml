@@ -8,38 +8,6 @@
   
 - name: Extract Ioncube
   unarchive: src=/tmp/ioncube_loaders_lin_x86-64.tar.gz dest=/tmp
-  
-- name: Copy Ioncube 5.6
-  become: yes
-  become_method: sudo
-  copy:
-    src: "/tmp/ioncube/ioncube_loader_lin_5.6.so"
-    dest: "/usr/lib/php/20131226/"
-  tags: ioncube
-    
-- name: Add Ioncube 5.6 as available php mod
-  become: yes
-  become_method: sudo
-  lineinfile: dest=/etc/php/5.6/mods-available/ioncube.ini line="zend_extension = /usr/lib/php/20131226/ioncube_loader_lin_5.6.so" create=yes state=present
-  tags: ioncube
-
-- name: Enable Ioncube for php 5.6
-  become: yes
-  become_method: sudo
-  file:
-    src: /etc/php/5.6/mods-available/ioncube.ini
-    dest: /etc/php/5.6/apache2/conf.d/0-ioncube.ini
-    state: link
-  tags: ioncube
-
-- name: Enable Ioncube for php 5.6 cli
-  become: yes
-  become_method: sudo
-  file:
-    src: /etc/php/5.6/mods-available/ioncube.ini
-    dest: /etc/php/5.6/cli/conf.d/0-ioncube.ini
-    state: link
-  tags: ioncube
 
 - name: Copy Ioncube 7.0
   become: yes
