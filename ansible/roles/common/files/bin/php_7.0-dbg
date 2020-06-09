@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+/usr/bin/php7.0 -d'xdebug.remote_autostart=On' -d'xdebug.remote_host=10.0.2.2' "$@"
+
